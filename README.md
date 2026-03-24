@@ -35,9 +35,6 @@ Visualization: Matplotlib, Seaborn
    - Exports the constructed graph to a Neo4j database for further analysis.
 ### 4. Mathematical Modeling (G-NK Model)
 The system calculates a comprehensive risk score (S) by balancing structural interaction and historical frequency:
-
-### 4. Mathematical Modeling (G-NK Model)
-The system calculates a comprehensive risk score (S) by balancing structural interaction and historical frequency:
 S = α · T + β · P
 - Coupling Degree (T): Derived from the N-K Model using multi-information entropy. It measures the complexity of risk interactions (2nd-order to 6th-order coupling).
 - Transition Probability (P): Calculated via Markov chains based on the historical frequency of risk evolution paths.
