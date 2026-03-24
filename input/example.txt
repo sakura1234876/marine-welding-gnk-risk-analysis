@@ -1,0 +1,33 @@
+Case 110
+I. Occurrence Time
+April 2020
+II. Occurrence Stage
+Segmented Stage
+III. Problem Phenomenon
+The measured weld angle did not match the marked weld angle as per the drawing requirements.
+IV. Analysis of Problem Causes
+The construction workers lacked responsibility and did not strictly follow the drawings during construction. Then, the management personnel failed to conduct inspections as required in a timely manner and failed to identify the problem, resulting in the weld angle not meeting the drawing requirements.V. Countermeasures
+1. The construction workers must be educated on the importance of following drawings and the consequences of not doing so.
+2. The management personnel must conduct regular inspections to ensure that the construction workers are following the drawings and to identify any problems early.
+3. The management personnel must take corrective action to ensure that the weld angle is corrected and that the construction workers are held accountable for their actions.
+##########
+Case 111
+I. Occurrence Time
+April 2020
+II. Occurrence Stage
+Segmented Stage
+III. Problem Phenomenon
+The measured weld angle did not match the marked weld angle as per the drawing requirements.
+IV. Analysis of Problem Causes
+The construction workers lacked a sense of responsibility and did not strictly follow the drawings during construction. Subsequently, the management personnel failed to inspect and promptly identify problems as required, resulting in the welding corners not meeting the requirements of the drawings.
+##########
+Case 112
+I. Occurrence Time
+April 2020
+II. Occurrence Stage
+Segmented Stage
+III. Problem Phenomenon
+The measured weld angle did not match the marked weld angle as per the drawing requirements.
+IV. Analysis of Problem Causes
+The construction workers lacked responsibility and violated the process requirements. There were a lot of garbage such as grease, water stains, and oxide scales in the welding area and its surrounding regions, which were not properly disposed of. Then, the management personnel failed to conduct the required inspections in a timely manner to identify the problems, resulting in poor welding quality.
+##########

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Descriptive statistics</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 1000px; height: 700px; margin: 0 auto;"></div>
+
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+
+        const colorMap = {
+            'H':  '#4B74B2', 
+            'MG': '#D7D737', 
+            'TE': '#FC8C5A',  
+            'EN': '#FFD97A', 
+            'MA': '#68CFB7', 
+            'EQ': '#29BBFF'  
+        };
+
+        const dataCases = [
+          { name: 'H',  value: 151, itemStyle: { color: colorMap['H'] } },
+          { name: 'MG', value: 140, itemStyle: { color: colorMap['MG'] } },
+          { name: 'TE', value: 97,  itemStyle: { color: colorMap['TE'] } },
+          { name: 'EN', value: 10,  itemStyle: { color: colorMap['EN'] } },
+          { name: 'MA', value: 13,   itemStyle: { color: colorMap['MA'] } },
+          { name: 'EQ', value: 5,   itemStyle: { color: colorMap['EQ'] } }
+        ];
+
+        const dataFactorsInner = [
+          { name: 'H',  value: 278, itemStyle: { color: colorMap['H'] } },
+          { name: 'MG', value: 142, itemStyle: { color: colorMap['MG'] } },
+          { name: 'TE', value: 56,  itemStyle: { color: colorMap['TE'] } },
+          { name: 'EN', value: 14,  itemStyle: { color: colorMap['EN'] } },
+          { name: 'MA', value: 8,   itemStyle: { color: colorMap['MA'] } },
+          { name: 'EQ', value: 7,   itemStyle: { color: colorMap['EQ'] } }
+        ];
+
+        const parentTotalMap = {};
+        dataFactorsInner.forEach(item => {
+            parentTotalMap[item.name] = item.value;
+        });
+
+        const rawOuterData = [
+          { name: 'H3', value: 140, itemStyle: { color: "#4b74b2" } },
+          { name: 'H2', value: 114, itemStyle: { color: "#6f90c1" } },
+          { name: 'H1', value: 24,  itemStyle: { color: "#93acd1" } },
+          { name: 'MG1', value: 115, itemStyle: { color: "#d7d737" } },
+          { name: 'MG2', value: 14,  itemStyle: { color: "#dfdf5f" } },
+          { name: 'MG3', value: 13,  itemStyle: { color: "#e7e787" } },
+          { name: 'TE2', value: 27, itemStyle: { color: "#fc8c5a" } },
+          { name: 'TE3', value: 17, itemStyle: { color: "#fda37b" } },
+          { name: 'TE1', value: 12, itemStyle: { color: "#fdba9c" } },
+          { name: 'EN2', value: 9, itemStyle: { color: "#ffd97a" } },
+          { name: 'EN1', value: 5, itemStyle: { color: "#ffe4a2" } },
+          { name: 'MA1', value: 3, itemStyle: { color: "#68cfb7" } },
+          { name: 'MA2', value: 3, itemStyle: { color: "#86d9c5" } },
+          { name: 'MA3', value: 2, itemStyle: { color: "#a4e2d4" } },
+          { name: 'EQ1', value: 4, itemStyle: { color: "#29bbff" } },
+          { name: 'EQ3', value: 2, itemStyle: { color: "#54c9ff" } },
+          { name: 'EQ2', value: 1, itemStyle: { color: "#7fd6ff" } }
+        ];
+
+        const processedOuterData = rawOuterData.map(item => {
+            const parentName = item.name.replace(/[0-9]/g, '');
+            const parentTotal = parentTotalMap[parentName];
+            const groupPercentStr = parentTotal ? ((item.value / parentTotal) * 100).toFixed(1) + '%' : '';
+            
+            return {
+                ...item,
+                label: {
+                    formatter: `{name|${item.name}}  {percent|${groupPercentStr}}`,
+                    overflow: 'none', 
+                    rich: {
+                        name: { 
+                            fontSize: 11, 
+                            fontWeight: 'bold', 
+                            color: '#333', 
+                            align: 'left',
+                            
+                            verticalAlign: 'middle',
+                            
+                            lineHeight: 15 
+                        },
+                        percent: { 
+                            fontSize: 10, 
+                            color: '#666', 
+                            align: 'right', 
+                            padding: [0, 0, 0, 5],
+                            
+                            verticalAlign: 'middle',
+                            lineHeight: 15
+                        }
+                    }
+                },
+                labelLine: { show: true } 
+            };
+        });
+
+        
+        const PIE_CENTER = ['65%', '50%']; 
+        const RADIUS_INNER = ['15%', '35%'];
+        const RADIUS_OUTER = ['37%', '50%'];
+
+        var option = {
+          backgroundColor: '#ffffff',
+          textStyle: {
+            fontFamily: 'Times New Roman, serif'
+          },
+          title: {
+            text: 'Factor frequency and factor distribution',
+            left: 'center',
+            top: 10
+          },
+          tooltip: { trigger: 'item' },
+          legend: {
+            show: true,
+            bottom: 10,
+            left: 'center',
+            data: ['H', 'MG', 'TE', 'EN', 'MA', 'EQ']
+          },
+          grid: {
+            left: '5%', width: '40%', top: '15%', bottom: '10%', containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            data: dataCases.map(d => d.name),
+            axisLabel: { interval: 0, fontSize: 11 }
+          },
+          yAxis: {
+            type: 'value',
+            name: 'Accident Count',
+            max: 180
+          },
+          series: [
+            {
+              name: 'Case Count',
+              type: 'bar',
+              data: dataCases,
+              barWidth: '40%',
+              label: { show: true, position: 'top' },
+              itemStyle: { borderRadius: [3, 3, 0, 0] }
+            },
+            
+         
+            {
+              name: 'Main Factor',
+              type: 'pie',
+              center: PIE_CENTER, 
+              radius: RADIUS_INNER, 
+              startAngle: 0, 
+              selectedMode: 'single',
+              label: { 
+                  position: 'inner', 
+                  fontSize: 10, 
+                  color: '#ffffff',     
+                  fontWeight: 'bold',
+                  formatter: '{b}\n{c}' 
+              },
+              labelLine: { show: false },
+              data: dataFactorsInner
+            },
+
+            {
+              name: 'Sub Factor',
+              type: 'pie',
+              center: PIE_CENTER,
+              radius: RADIUS_OUTER, 
+              startAngle: 0, 
+              
+              avoidLabelOverlap: true, 
+              
+              labelLayout: {
+                  hideOverlap: false, 
+                  moveOverlap: 'shiftY', 
+                  draggable: true
+              },
+              
+              labelLine: { 
+                  show: true,
+                  length: 15,   
+                  length2: 20,  
+                  maxSurfaceAngle: 80 
+              },
+              
+              label: {
+                  alignTo: 'labelLine', 
+                  minMargin: 8, 
+                  edgeDistance: 10 
+              },
+              
+              data: processedOuterData,
+              itemStyle: {
+                  borderColor: '#ffffff',
+                  borderWidth: 1.5
+              }
+            }
+          ]
+        };
+        myChart.setOption(option);
+        
+        window.addEventListener('resize', function() {
+            myChart.resize();
+        });
+    </script>
+</body>
+</html>
